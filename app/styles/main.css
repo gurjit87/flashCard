@@ -3,3 +3,7 @@ body{
   color: white;
   font-family: 'Open Sans';
 }
+
+.containerCenter{
+  margin-top: 14%;
+}

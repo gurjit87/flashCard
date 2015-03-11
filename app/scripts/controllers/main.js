@@ -44,6 +44,16 @@ angular.module('flashCardApp')
     	$scope.showAnswer = toggle;
     }
 
+    $scope.answer = function answer(toggle){
+    	if(toggle){
+    		$scope.cards[$scope.cardIndex].correct += 1;
+    	}else{
+    		$scope.cards[$scope.cardIndex].incorrect += 1;
+    	}
+    	$scope.cards.$save($scope.cardIndex);
+    	$scope.randomizeCard();
+    }
+
     /**
      * saves a new card to the server for later testing.
      * @return {[null]}
@@ -58,13 +68,13 @@ angular.module('flashCardApp')
      * @return {[null]}
      */
     $scope.randomizeCard = function randomizeCard(){
-    	var newCard = Math.floor(Math.random() * $scope.cards.length - 1) + 0;
-    	 if($scope.cards[newCard] == $scope.currentCard && $scope.cards.length > 1){
+    	 $scope.cardIndex= Math.floor(Math.random() * $scope.cards.length - 1) + 0;
+    	 if($scope.cards[$scope.cardIndex] == $scope.currentCard && $scope.cards.length > 1){
     		$scope.randomizeCard();
     	}else{
-    		$scope.currentCard = $scope.cards[newCard];
-    		$scope.cards[newCard].views += 1;
-    		$scope.cards.$save(newCard);
+    		$scope.currentCard = $scope.cards[$scope.cardIndex];
+    		$scope.cards[$scope.cardIndex].views += 1;
+    		$scope.cards.$save($scope.cardIndex);
     		$scope.showAnswerToggle(false)
     	}
     }

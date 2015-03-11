@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container containerCenter">
   <div data-ng-if="false" class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <form >
@@ -20,18 +20,39 @@
       <button type="submit" class="btn btn-primary" data-ng-click="saveCard()">Submit</button>
     </div>
   </div>
-  <div data-ng-if="showAnswer" class="row">
+  <div data-ng-if="!showAnswer" class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
       <h1>{{currentCard.question}}</h1>
-      <button type="button" class="btn btn-default">Show Answer</button>
+      <hr />
+      <button  datra-ng-if="currentcard.question"type="button" class="btn btn-default" data-ng-click="showAnswerToggle(true)">Show Answer</button>
     </div>
   </div>
-  <hr />
-  <div data-ng-if="!showAnswer" class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      Correct Answers: {{currentCard.correct}}
+  <div data-ng-if="showAnswer" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+      <h2>{{currentCard.answer}}</h2>
+      
+    </div>
+  </div>
+  <hr data-ng-if="showAnswer" />
+  <div data-ng-if="showAnswer" class="row">
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+      I got this question right this many times: {{currentCard.correct}}
       <br />
-      Incorrect Answers: {{currentCard.incorrect}}
+      I got this question wrong this many times: {{currentCard.incorrect}}
+    </div>
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+      <form action="" method="POST" class="form-inline" role="form">
+      
+        <div class="form-group">
+         <button type="button" class="btn btn-success" data-ng-click="answer(true)">Got it Right!</button>
+        </div>
+        <div class="form-group">
+         <button type="button" class="btn btn-danger" data-ng-click="answer(false)">Got it Wrong!</button>
+        </div>
+      
+      </form>
     </div>
   </div>
 </div>
